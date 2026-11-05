@@ -1,0 +1,3 @@
+[submodule "Plugins/DrsFramework"]
+	path = Plugins/DrsFramework
+	url = https://github.com/DrStevenWright/DrsFramework.git
