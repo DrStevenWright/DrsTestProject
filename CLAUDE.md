@@ -40,6 +40,10 @@ Check the framework's layer rules (run inside `Plugins/DrsFramework`; exits 1 on
 powershell -ExecutionPolicy Bypass -File Tools/CheckLayers.ps1
 ```
 
+## Code style
+
+All code in this project and in DrsFramework follows [`Plugins/DrsFramework/Docs/CodingConventions.md`](Plugins/DrsFramework/Docs/CodingConventions.md). In short: Epic's standard with the `Drs` prefix, except that arguments and locals are camelCase with no `b`, and every code file starts with the MIT copyright line.
+
 ## Git workflow
 
 - Use Conventional Commits for branch names (`feat/…`, `fix/…`, `chore/…`, `docs/…`, `refactor/…`, `test/…`, `ci/…`), commit subjects and PR titles (`feat(scope): summary`).
