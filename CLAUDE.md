@@ -10,7 +10,7 @@ DrsTestProject is the UE 5.8 host project for developing and testing **DrsFramew
 
 - `Plugins/Dev/` is for dev-only plugins, such as MCP tooling. **DrsFramework must never depend on anything in `Plugins/Dev/` or on this project.**
 - The project enables only `DrsCore`; it enables the rest of the framework through its `.uplugin` dependencies. The `.uproject` also enables the editor plugins for MCP (`ModelContextProtocol`, `AllToolsets`, `Terminal`). These bring in GameFeatures, which is why `DefaultGame.ini` scans `GameFeatureData` assets.
-- `Config/DefaultEngine.ini` sets `DrsGameMode` as the global game mode and sets up XR rendering: forward shading, MSAA, instanced stereo / mobile multi-view, no Lumen, no virtual shadow maps. It also has the Android/Quest packaging settings (arm64, Vulkan, SDK 32).
+- `Config/DefaultEngine.ini` sets `/DrsCore/BP_DrsGameMode` as the global game mode and `/DrsCore/BP_DrsGameInstance` as the game instance (both Blueprints live in DrsCore's plugin content), and sets up XR rendering: forward shading, MSAA, instanced stereo / mobile multi-view, no Lumen, no virtual shadow maps. It also has the Android/Quest packaging settings (arm64, Vulkan, SDK 32).
 
 ## Commands
 
@@ -46,8 +46,11 @@ All code in this project and in DrsFramework follows [`Plugins/DrsFramework/Docs
 
 ## Git workflow
 
-- Use Conventional Commits for branch names (`feat/…`, `fix/…`, `chore/…`, `docs/…`, `refactor/…`, `test/…`, `ci/…`), commit subjects and PR titles (`feat(scope): summary`).
-- **Framework changes go in the submodule first.** The submodule is often on a detached HEAD, so check out a branch inside `Plugins/DrsFramework` before committing. Commit there, open a PR against DrsFramework `main`, then update the submodule pointer in this repo on its own branch and PR.
+Follow [`Plugins/DrsFramework/Docs/GitWorkflow.md`](Plugins/DrsFramework/Docs/GitWorkflow.md) for branch names, commit subjects, scopes, PR titles and descriptions, and squash merging. In short:
+
+- Conventional Commits everywhere (`feat(core): summary`), with no breaking-change markers while the framework's major version is 0.
+- **Framework changes go in the submodule first,** on a branch from `origin/main` (the submodule is often on a detached HEAD), with their own PR against DrsFramework `main`.
+- **Update the submodule pointer here only after that PR merges,** to the squash commit on DrsFramework `main`, on its own branch and PR.
 
 ## Tooling
 
