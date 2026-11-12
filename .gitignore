@@ -4,6 +4,14 @@ Intermediate/
 Saved/
 DerivedDataCache/
 
+# Files UE writes under Build/ when packaging. Anything else in Build/ (e.g. a PakDenylist) stays tracked.
+# src/ and project.properties are regenerated on every Android package; FileOpenOrder/ is cook output.
+Build/Android/src/
+Build/Android/project.properties
+Build/*/FileOpenOrder/
+# Default icons and splash screens copied from the engine. To ship custom ones, delete this line and commit them.
+Build/Android/res/
+
 # IDE files
 .vs/
 .vscode/
