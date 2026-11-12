@@ -54,4 +54,4 @@ Follow [`Plugins/DrsFramework/Docs/GitWorkflow.md`](Plugins/DrsFramework/Docs/Gi
 
 ## Tooling
 
-`.mcp.json` registers the `unreal-mcp` server at `http://127.0.0.1:8000/mcp`. It is only reachable while the editor is running.
+The editor's MCP server (`http://127.0.0.1:8000/mcp`) comes from the `unreal-mcp-status` plugin, which `.claude/settings.json` enables from the `claude-mods` marketplace. It is only reachable while the editor is running. As a plugin server it shows as `plugin:unreal-mcp-status:unreal-mcp`, its tools are `mcp__plugin_unreal-mcp-status_unreal-mcp__*`, and the plugin connects it by itself when the editor starts after the session (or run `/unreal-connect`). Don't add `unreal-mcp` back to a project `.mcp.json`: a project server of the same name hides the plugin's and can't be reconnected in a running session.
