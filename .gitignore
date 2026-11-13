@@ -9,7 +9,6 @@ DerivedDataCache/
 Build/Android/src/
 Build/Android/project.properties
 Build/*/FileOpenOrder/
-# Default icons and splash screens copied from the engine. To ship custom ones, delete this line and commit them.
 Build/Android/res/
 
 # IDE files
@@ -23,7 +22,12 @@ Build/Android/res/
 *.sdf
 *.VC.db
 *.VC.opendb
+*.user
+
+# Claude Code per-user settings
+.claude/settings.local.json
 
 # OS files
 .DS_Store
 Thumbs.db
+
