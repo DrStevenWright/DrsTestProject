@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-DrsTestProject is the UE 5.8 host project for developing and testing **DrsFramework**, an XR framework (Meta Quest over Link and standalone Android; Pico as a cross-platform test case). The framework lives in a separate repo, included as a git submodule at `Plugins/DrsFramework`. Almost all real code is there; this repo holds test content (`Content/Maps/DrsTestMap`), config and an empty game module.
+DrsTestProject is the UE 5.8 host project for developing and testing **DrsFramework**, an XR framework (Meta Quest over Link and standalone Android). The framework lives in a separate repo, included as a git submodule at `Plugins/DrsFramework`. Almost all real code is there; this repo holds test content (`Content/Maps/DrsTestMap`), config and an empty game module.
 
 **For the framework's architecture, layer rules and conventions, see `Plugins/DrsFramework/CLAUDE.md`.**
 
