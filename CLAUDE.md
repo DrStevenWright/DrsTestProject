@@ -26,7 +26,7 @@ Options: `-EngineDir <path>`, `-SkipSubmodules`, `-ProjectFile <path>`. To rebui
 & "<EngineDir>\Engine\Build\BatchFiles\Build.bat" DrsTestProjectEditor Win64 Development -Project="<root>\DrsTestProject.uproject" -WaitMutex
 ```
 
-Run the framework tests. They are UE Automation tests named `Drs.*`. `RunTests` takes a name prefix, so pass a full test name to run a single test (e.g. `Drs.Globals.Version`):
+Run the framework tests. They are UE Automation tests named `Drs.*`. `RunTests` takes a name prefix, so pass a full test name to run a single test (e.g. `Drs.Base.Version`):
 
 ```
 UnrealEditor-Cmd.exe <root>/DrsTestProject.uproject -ExecCmds="Automation RunTests Drs; Quit" -unattended -nullrhi -nosplash
