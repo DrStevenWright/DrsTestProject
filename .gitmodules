@@ -1,3 +1,7 @@
 [submodule "Plugins/DrsFramework"]
 	path = Plugins/DrsFramework
 	url = https://github.com/DrStevenWright/DrsFramework.git
+[submodule "Plugins/MetaXR"]
+	path = Plugins/MetaXR
+	url = https://github.com/DrStevenWright/MetaXR.git
+	branch = drs
