@@ -8,6 +8,7 @@ DrsTestProject is the UE 5.8 host project for developing and testing **DrsFramew
 
 **For the framework's architecture, layer rules and conventions, see `Plugins/DrsFramework/CLAUDE.md`.**
 
+- `Plugins/MetaXR` is the private MetaXR fork, a submodule on its `drs` branch ([DrStevenWright/MetaXR](https://github.com/DrStevenWright/MetaXR)). Clones without access won't fetch it, and everything still builds and runs without it. The `.uproject` lists `OculusXR` as disabled by default; enable it there (or in the editor's Plugins window) to use the fork. It is also marked `Optional`, so an enabled entry is skipped when the fork is missing. The fork is integrated with DrsFramework's XR arbiter, so its modules load only when the arbiter picks Meta (see `Plugins/DrsFramework/Platform/DrsXrPlatform/CLAUDE.md`). DrsFramework must never depend on it.
 - `Plugins/Dev/` is for dev-only plugins, such as MCP tooling. **DrsFramework must never depend on anything in `Plugins/Dev/` or on this project.**
 - The project enables only `DrsCore`; it enables the rest of the framework through its `.uplugin` dependencies. The `.uproject` also enables the editor plugins for MCP (`ModelContextProtocol`, `AllToolsets`, `Terminal`). These bring in GameFeatures, which is why `DefaultGame.ini` scans `GameFeatureData` assets.
 - `Config/DefaultEngine.ini` sets `/DrsCore/BP_DrsGameMode` as the global game mode and `/DrsCore/BP_DrsGameInstance` as the game instance (both Blueprints live in DrsCore's plugin content), and sets up XR rendering: forward shading, MSAA, instanced stereo / mobile multi-view, no Lumen, no virtual shadow maps. It also has the Android/Quest packaging settings (arm64, Vulkan, SDK 32).
@@ -51,6 +52,17 @@ Follow [`Plugins/DrsFramework/Docs/GitWorkflow.md`](Plugins/DrsFramework/Docs/Gi
 - Conventional Commits everywhere (`feat(core): summary`), with no breaking-change markers while the framework's major version is 0.
 - **Framework changes go in the submodule first,** on a branch from `origin/main` (the submodule is often on a detached HEAD), with their own PR against DrsFramework `main`.
 - **Update the submodule pointer here only after that PR merges,** to the squash commit on DrsFramework `main`, on its own branch and PR.
+
+## The MetaXR fork
+
+The fork keeps two lines of history:
+
+- `main` holds Meta's releases only, one commit per release, tagged with the version (`v1.209.0`). Binaries, Intermediate and source `.fbx` files are left out, and files are stored in plain git, not LFS.
+- `drs` is the fork, and the submodule tracks it. New releases are merged into it from `main` with a merge commit, so the fork doesn't use squash-only merging.
+
+Every change on `drs` is tagged with a `DRS:` comment (`// DRS:` in code, `<!-- DRS: -->` in XML, `; DRS:` in ini files, a `DrsComment` key in the `.uplugin`), so search for `DRS:` to list them. Changes to binary assets are tagged in their commit message instead. Patches go to `drs` through pull requests that are merged with a merge commit. Don't reformat Meta's code.
+
+To upgrade, import the new release onto `main` and tag it, merge the tag into `drs`, then update the submodule pointer here. Merge conflicts appear only where a `DRS:` patch meets Meta's changes. Re-check the `.uplugin` after a merge: every new module needs `LoadingPhase` `None` and its real phase in `ArbitratedLoadingPhase`.
 
 ## Tooling
 

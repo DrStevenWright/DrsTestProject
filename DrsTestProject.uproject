@@ -16,6 +16,11 @@
 			"Enabled": true
 		},
 		{
+			"Name": "OculusXR",
+			"Enabled": false,
+			"Optional": true
+		},
+		{
 			"Name": "ModelContextProtocol",
 			"Enabled": true
 		},
