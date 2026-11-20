@@ -1,13 +1,13 @@
 {
   "extraKnownMarketplaces": {
-    "claude-mods": {
+    "drs-claude-tools": {
       "source": {
         "source": "github",
-        "repo": "DrStevenWright/claude-mods"
+        "repo": "DrStevenWright/DrsClaudeTools"
       }
     }
   },
   "enabledPlugins": {
-    "unreal-mcp-status@claude-mods": true
+    "unreal-mcp@drs-claude-tools": true
   }
 }
