@@ -58,9 +58,9 @@ Follow [`Plugins/DrsFramework/Docs/GitWorkflow.md`](Plugins/DrsFramework/Docs/Gi
 The fork keeps two lines of history:
 
 - `main` holds Meta's releases only, one commit per release, tagged with the version (`v1.209.0`). Binaries, Intermediate and source `.fbx` files are left out, and files are stored in plain git, not LFS.
-- `drs` is the fork, and the submodule tracks it. New releases are merged into it from `main` with a merge commit, so the fork doesn't use squash-only merging.
+- `drs` is the fork, and the submodule tracks it. New releases are merged into it from `main` with a merge commit, never squashed: a squash drops the link to the release, so the next upgrade would re-conflict on files already resolved. The repo allows both squash and merge commits on GitHub, so pick per PR (rebase merging is off).
 
-Every change on `drs` is tagged with a `DRS:` comment (`// DRS:` in code, `<!-- DRS: -->` in XML, `; DRS:` in ini files, a `DrsComment` key in the `.uplugin`), so search for `DRS:` to list them. Changes to binary assets are tagged in their commit message instead. Patches go to `drs` through pull requests that are merged with a merge commit. Don't reformat Meta's code.
+Every change on `drs` is tagged with a `DRS:` comment (`// DRS:` in code, `<!-- DRS: -->` in XML, `; DRS:` in ini files, a `DrsComment` key in the `.uplugin`), so search for `DRS:` to list them. Changes to binary assets are tagged in their commit message instead. Patches go to `drs` through pull requests that are **squash merged**, one commit per patch. Only the release merge from `main` uses a merge commit. Don't reformat Meta's code.
 
 To upgrade, import the new release onto `main` and tag it, merge the tag into `drs`, then update the submodule pointer here. Merge conflicts appear only where a `DRS:` patch meets Meta's changes. Re-check the `.uplugin` after a merge: every new module needs `LoadingPhase` `None` and its real phase in `ArbitratedLoadingPhase`.
 
